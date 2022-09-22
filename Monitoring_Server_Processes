@@ -1,0 +1,29 @@
+bin/bash
+#Monitoring Server Processes
+#Author:Anjuli Panizzi
+#Date: 08-11-2022
+#Description: The purpose of this script is to monitor the server's processes and system performance. The script will allow the user to terminate processes that utilize too much memory.
+#What will break this script: entering multiple PIDs, not entering any PID, and  not entering yes or no when prompted.
+
+# List and sort the server processes.
+
+ps -o pid,user,%mem,command ax | sort -b -k3 -r
+echo "Is there a process in this list with %Mem usage greater than 10% (y/n)?"
+read answer
+
+# Ask user to terminate the process the exceeds the memory threshold.
+
+if [ "$answer" != "${answer#[Yy]}" ] ;then 
+    read -p "Enter PID with %Mem greater than 10%     " PID
+    read -p "Process $PID must be terminated. Press enter to kill this process" user_command 
+    kill -9 $PID
+    echo "Process ID $PID has been terminated. Goodbye!"
+exit
+
+else
+    echo "No process exceeds the memory threshold. Goodbye!"
+exit
+fi
+
+
+
