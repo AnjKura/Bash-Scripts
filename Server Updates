@@ -1,0 +1,15 @@
+#!/bin/bash
+# Server Updates
+#This command will update the server.
+echo "Hello User! The server will update now."
+apt-get update -y
+#This comand will upgrade the server.
+echo "Hello User! The server will upgrade now."
+apt-get upgrade -y
+echo "Ok User! The server is updated."
+# append contents of truncated log to a new file
+cat /var/log/apt/history.log >> "$(date +"%Y_%m_%d_%I_%M_%p")autoupdate.log"
+echo "The log of the automatic update can be found in this file."
+printf "$(date +"%Y_%m_%d_%I_%M_%p")autoupdate.log                  "
+echo "Goodbye user!"
+exit
