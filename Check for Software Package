@@ -1,0 +1,13 @@
+#Check for a package and let the user know if the package exists on the computer or not
+
+dpkg-l$packagename
+
+if which $packagename >/dev/null; then
+
+    echo exists
+
+else
+
+    echo does not exist
+
+fi
