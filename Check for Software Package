@@ -1,13 +1,23 @@
-#Check for a package and let the user know if the package exists on the computer or not
+#!/bin/bash
 
-dpkg-l$packagename
+#This script will check whether the package is installed.
 
-if which $packagename >/dev/null; then
+# Prompt user for package name.
 
-    echo exists
+echo "Enter the name of the package to check installation status: "
 
-else
+read packagename
 
-    echo does not exist
+# Check if package is installed. Tell user whether package is installed or not.
+
+if ! dpkg-query -l $packagename &> /dev/null; then
+
+    echo "The $packagename package is not installed.";
+
+    exit
+
+    else echo "The $packagename package is installed.";
+
+    exit
 
 fi
