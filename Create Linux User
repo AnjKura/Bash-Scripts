@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Purpose - Script to add a user to Linux system including full name, password,shell,group.
+
+
+
+ROOT_UID=0
+
+SUCCESS=0
+
+
+
+# This script must be run as root.
+
+if [ "$UID" -ne "$ROOT_UID" ]
+
+then
+
+  echo "Must be root to run this script."
+
+  exit $E_NOTROOT
+
+fi  
+
+#Prompt user to enter account data.
+
+if [ $(id -u) -eq 0 ]; then
+
+   read -p "Enter first name:" firstname_var 
+
+   read -p "Enter last name:"  lastname_var
+
+   echo "Your username is: " ${firstname_var:0:1}$lastname_var
+
+   read -p "Enter your username from the line above:" username
+
+   echo "This is your shell:"   $SHELL
+
+   read -p "Enter your shell. Please copy the text from the line above:" shell_var
+
+   read -p "Enter new group name:" groupname_var
+
+   groupadd $groupname_var
+
+   echo "Group $groupname_var was created" 
+
+   read -s -p "Enter your password: "               password
+
+   sudo useradd -m $username
+
+   echo "                                   	New user created!"
+
+   sudo usermod -a -G $groupname_var $username
+
+   echo "$username has been added to $groupname_var"
+
+   echo "$username:$password" | chpasswd
+
+   echo "Goodbye $username !"
+
+   exit 
+
+fi 
