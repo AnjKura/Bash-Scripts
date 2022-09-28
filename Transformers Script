@@ -1,0 +1,14 @@
+#!/bin/bash
+echo "Which one is the strongest Transformer?"
+echo "Bumblebee"
+echo "Optimus Prime"
+echo "Megatron"
+echo "Starscream"
+read Transformer;
+case $Transformer in
+  Bumblebee) echo "Fun Autobot";;
+ "Optimus Prime") echo "Lead Autobot";;
+  Megatron) echo "Lead Decepticon";;
+  Starscream) echo "Sidekick Decepticon";;
+
+esac
